@@ -120,11 +120,20 @@ class Bot:
                         # prep args
                         now = datetime.datetime.now()
                         date = now.strftime("%m-%d-%Y_%H-%M-%S")
+                        directory_structure = self.config["directory_structure"]
+                        video_path = directory_structure.format(path=self.config["Video_folder"], model=streamer[0],
+                                              seconds=now.strftime("%S"),
+                                              minutes=now.strftime("%M"), hour=now.strftime("%H"),
+                                              day=now.strftime("%d"),
+                                              month=now.strftime("%m"), year=now.strftime("%Y"))
+                        directory = video_path.rsplit("/", 1)[0]+"/"
+                        if not os.path.exists(directory):
+                               os.makedirs(directory)
                         args = ["streamlink",  # streamlink bin
                                 "https://chaturbate.com/{}/".format(streamer[0]),  # chaturbate url
                                 "best",
                                 "-o",
-                                "videos/{}_{}.mp4".format(streamer[0], date)]
+                                video_path]
                         # append idx and process to processes list
                         self.processes.append([streamer[0], subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)])
 
