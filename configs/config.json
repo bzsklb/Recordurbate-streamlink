@@ -3,5 +3,8 @@
     "rate_limit": true,
     "rate_limit_time": 5,
     "default_export_location": "./list.txt",
+    "Video_folder": "/videos",
+    "Video_filename": "{path}/<model>/<model>_<timestamp>.mp4",
+    "directory_structure": "{path}/{model}/{year}.{month}.{day}_{hour}.{minutes}.{seconds}_{model}.mp4",
     "streamers": []
 }
